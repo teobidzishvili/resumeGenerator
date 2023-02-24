@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Resume Generator</title>
+    <style>
+        @font-face {
+            font-family: "HelveticaNeue";
+            src: url("./assets/HelveticaNeue-01.ttf");
+            src: url("./assets/HelveticaNeue-Bold-02.ttf");
+            src: url("./assets/HelveticaNeue-Italic-03.ttf");
+            src: url("./assets/HelveticaNeue-BoldItalic-04.ttf");
+            src: url("./assets/HelveticaNeue-CondensedBold-05.ttf");
+            src: url("./assets/HelveticaNeue-UltraLight-06.ttf");
+            src: url("./assets/HelveticaNeue-UltraLightItalic-07.ttf");
+            src: url("./assets/HelveticaNeue-Light-08.ttf");
+            src: url("./assets/HelveticaNeue-Light-08.ttf");
+            src: url("./assets/HelveticaNeue-LightItalic-09.ttf");
+            src: url("./assets/HelveticaNeue-CondensedBlack-10.ttf");
+            src: url("./assets/HelveticaNeue-Medium-11.ttf");
+            src: url("./assets/HelveticaNeue-MediumItalic-12.ttf");
+            src: url("./assets/HelveticaNeue-Thin-13.ttf");
+            src: url("./assets/HelveticaNeue-ThinItalic-14.ttf");
+        } 
+        * {
+            font-family: 'HelveticaNeue', sans-serif;                                                
+        }
+        .fullname {
+            width: 20vw
+        }
+        #name_error, #surname_error {
+            position: relative;
+            top: -2em;
+            left: 20.5vw;
+        }
+        #name_done, #surname_done {
+            position: relative;
+            top: -2.2em;
+            left: 18.5vw
+        }
+        #email_error, #phone_error, #position_error, #employer_error {
+            position: relative;
+            top: -2em;
+            left: 101%;
+        }
+        #email_done, #phone_done, #position_done, #employer_done {
+            position: relative;
+            top: -2.1em;
+            left: 97%;
+        }
+        .form {
+            background: #F9F9F9;
+        }
+    </style>
+</head>
+<body>
+    <a href="./index.html">
+        <img src="./Images/Vector.png" alt="arrow" class="position-absolute mx-5 mt-4">
+    </a>
+    <div class="mx-5 mt-5 px-4 row">
+        <form method="POST" action="https://resume.redberryinternship.ge/api/cvs" class="row mt-2 mx-2 col-6" id="form">
+
+            <!-- პირადი ინფოს გვერდი -->
+
+            <div class="" id="fill">
+                <div class="d-flex flex-row justify-content-between align-items-center col-12">
+                    <h3>პირადი ინფო</h3>
+                    <div id="pageCounter">
+                        <span id="currentPage">1</span>/<span id="totalPages">3</span>
+                    </div>
+                </div>
+                <img src="./Images/Line 13.png" alt="line" class="d-flex justify-content-around mt-2 col-12">
+                <div class="d-flex justify-content-between">
+                    <div class="form-group mt-5 fullname">
+                        <label for="sakheli" id="name-label">სახელი</label>
+                        <input class="form-control" class="input" id="sakheli" oninput="yourName.value=sakheli.value" required></input>
+                        <img src="./Images/Vector-1.png" alt="error icon" id="name_error" class="d-none">
+                        <img src="./Images/Vector-2.png" alt="error icon" id="name_done" class="d-none">
+                        <small id="sakheli1" class="form-text text-muted">
+                            მინიმუმ 2 ასო, ქართული ასოები
+                        </small>
+                    </div>
+                    <div class="form-group mt-5 fullname">
+                        <label for="gvari" id="gvari_label">გვარი</label>
+                        <input class="form-control" class="input" id="gvari" oninput="yourSurname.value=gvari.value" required></input>
+                        <img src="./Images/Vector-1.png" alt="error icon" id="surname_error" class="d-none">
+                        <img src="./Images/Vector-2.png" alt="error icon" id="surname_done" class="d-none">
+                        <small id="gvari1" class="form-text text-muted">
+                            მინიმუმ 2 ასო, ქართული ასოები
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group my-4 row">
+                    <label class="col-4 pt-1">პირადი ფოტოს ატვირთვა</label>
+                    <label for="photo" class="col-2 p-1 bg-primary text-white text-center" id="upload" style="border-radius: 4px;"><input type="file" class="form-control-file d-none" id="photo" required>ატვირთვა</label>
+                </div>
+                <div class="form-group">
+                    <label for="about-me" class="mb-2">ჩემ შესახებ (არასავალდებულო)</label>
+                    <textarea class="form-control" id="aboutMe" rows="5" placeholder="ზოგადი ინფო ჩემ შესახებ" oninput="aboutYou.value=aboutMe.value"></textarea>
+                </div>
+                <div class="form-group my-4">
+                    <label for="email" class="mb-2" id="email_label">ელ.ფოსტა</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="example@redberry.ge" oninput="yourEmail.value=email.value;" required>
+                    <img src="./Images/Vector-1.png" alt="error icon" id="email_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="email_done" class="d-none">
+                    <small id="emailHelp" class="form-text text-muted">უნდა მთავრდებოდეს @redberry.ge-ით</small>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber" class="mb-2" id="phone_label">მობილურის ნომერი</label>
+                    <input type="tel" class="form-control" id="phone_number" name="phoneNumber" placeholder="+995 555 12 34 56" oninput="yourPhone.value=phone_number.value" onkeydown="phoneNumberFormat()">
+                    <img src="./Images/Vector-1.png" alt="error icon" id="phone_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="phone_done" class="d-none">
+                    <small id="phone" class="form-text text-muted">უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</small>
+                </div>
+            </div>
+
+            <!-- გამოცდილების გვერდი -->
+
+            <div class="mt-2" id="fill2">
+                <div class="d-flex flex-row justify-content-between align-items-center col-12">
+                    <h3>გამოცდილება</h3>
+                    <div id="pageCounter">
+                        <span id="currentPage">1</span>/<span id="totalPages">3</span>
+                    </div>
+                </div>
+                <img src="./Images/Line 13.png" alt="line" class="d-flex justify-content-around mt-2 col-12">
+                
+                <div class="form-group mt-5">
+                    <label for="position" id="position_label">თანამდებობა</label>
+                    <input class="form-control" class="input" id="position" oninput="yourPosition.value=position.value" required></input>
+                    <img src="./Images/Vector-1.png" alt="error icon" id="position_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="position_done" class="d-none">
+                    <small id="position" class="form-text text-muted">
+                        მინიმუმ 2 სიმბოლო
+                    </small>
+                </div>
+                <div class="form-group mt-5">
+                    <label for="employer" id="employer_label">დამსაქმებელი</label>
+                    <input class="form-control" class="input" id="employer" oninput="yourEmplyer.value=employer.value" required></input>
+                    <img src="./Images/Vector-1.png" alt="error icon" id="employer_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="employer_done" class="d-none">
+                    <small id="employer" class="form-text text-muted">
+                        მინიმუმ 2 სიმბოლო
+                    </small>
+                </div>
+                <div class="d-flex justify-content-between my-4">
+                    <div class="">
+                        <label for="start" class="my-2">დაწყების რიცხვი</label>
+                        <input class="col-12 p-2" type="date" id="start" name="work-start" value="2018-07-22" min="2000-01-01" max="2023-12-31" required>
+                    </div>
+                    <div class="col-5">
+                        <label for="end" class="my-2">დამთავრების რიცხვი</label>
+                        <input class="col-12 p-2" type="date" id="end" name="work-end" value="2018-07-22" min="2000-01-01" max="2023-12-31" requested>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="mb-2">აღწერა</label>
+                    <textarea class="form-control" id="description" rows="5" placeholder="როლი თანამდებობაზე და ზოგადი აღწერა" oninput="yourDescription.value=description.value" required></textarea>
+                </div>
+                <button class="col-5 my-4 p-2 bg-primary text-white text-center border-0" style="border-radius: 4px;">მეტი გამოცდილების დამატება</button>
+            </div>
+
+            <!-- განათლების გვერდი -->
+
+            <div class="mt-2" id="fill2">
+                <div class="d-flex flex-row justify-content-between align-items-center col-12">
+                    <h3>განათლება</h3>
+                    <div id="pageCounter">
+                        <span id="currentPage">1</span>/<span id="totalPages">3</span>
+                    </div>
+                </div>
+                <img src="./Images/Line 13.png" alt="line" class="d-flex justify-content-around mt-2 col-12">
+                
+                <div class="form-group mt-5">
+                    <label for="position" id="position_label">სასწავლებელი</label>
+                    <input class="form-control" class="input" id="position" oninput="yourPosition.value=position.value" required></input>
+                    <img src="./Images/Vector-1.png" alt="error icon" id="position_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="position_done" class="d-none">
+                    <small id="position" class="form-text text-muted">
+                        მინიმუმ 2 სიმბოლო
+                    </small>
+                </div>
+                <div class="form-group mt-5">
+                    <label for="employer" id="employer_label">დამსაქმებელი</label>
+                    <input class="form-control" class="input" id="employer" oninput="yourEmplyer.value=employer.value" required></input>
+                    <img src="./Images/Vector-1.png" alt="error icon" id="employer_error" class="d-none">
+                    <img src="./Images/Vector-2.png" alt="error icon" id="employer_done" class="d-none">
+                    <small id="employer" class="form-text text-muted">
+                        მინიმუმ 2 სიმბოლო
+                    </small>
+                </div>
+                <div class="d-flex justify-content-between my-4">
+                    <div class="col-5">
+                        <label for="level" class="my-2">ხარისხი</label>
+                        <select class="col-12 p-2" name="level" id="degrees"></select>
+                    </div>
+                    <div class="col-5">
+                        <label for="end" class="my-2">დამთავრების რიცხვი</label>
+                        <input class="col-12 p-2" type="date" id="end" name="work-end" value="2018-07-22" min="2000-01-01" max="2023-12-31" requested>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="mb-2">აღწერა</label>
+                    <textarea class="form-control" id="description" rows="5" placeholder="განათლების აღწერა" oninput="yourDescription.value=description.value" required></textarea>
+                </div>
+                <button class="col-5 my-4 p-2 bg-primary text-white text-center border-0" style="border-radius: 4px;">სხვა სასწავლებლის დამატება</button>
+            </div>
+
+
+            <div class="d-flex justify-content-between">
+                <div class="col-3">
+                    <button type="submit" class="btn my-5 col-12 px-3 py-2" id="nextButton" style="background: #6B40E3; color: #FFF;">უკან</button>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn my-5 col-12 px-3 py-2" id="nextButton" style="background: #6B40E3; color: #FFF;">შემდეგი</button>
+                </div>
+            </div>
+            
+        </form>
+        <div class="m-5 col-5" id="run">
+            <input type="text" class="border-0 text-danger font-weight-bold h2 col-3" id="yourName" readonly>
+            <input type="text" class="border-0 text-danger h2 col-6" id="yourSurname" readonly>
+            <div>
+                <img src="./Images/Vector-3.png" alt="at icon" class="d-none" id="at">
+                <input type="text" class="border-0 text-dark h5" id="yourEmail" readonly><br>
+            </div>
+
+            <input type="text" class="border-0 text-dark h5" id="yourPhone" readonly><br>
+            <div class="col-12">
+                <div class="text-danger font-weight-bold h4 py-3 d-none" id="about">ჩემ შესახებ</div>
+                <input type="text" class="border-0 text-dark h5 col-10" id="aboutYou" readonly><br>
+            </div> 
+            <input type="text" class="border-0" id="yourPosition" readonly>
+            <input type="text" class="border-0" id="yourDescription" readonly>
+
+        </div>
+    </div>
+    
+    
+    <script src="./main.js"></script>
+</body>
+</html>
