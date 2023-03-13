@@ -90,17 +90,6 @@ let phone_label = document.getElementById("phone_label")
 let phone_error = document.getElementById("phone_error")
 let txt
 
-phone_number.addEventListener("keyup", function () {
-    txt = this.value;
-    if (
-      txt.length == 4 ||
-      txt.length == 8 ||
-      txt.length == 11 ||
-      txt.length == 14
-    )
-      this.value = this.value + " ";
-  });
-
 phone_number.addEventListener("input", function() {
     let phoneRegEx = /^(\+995)?(79\d{7}|5\d{8})$/
     if (!phoneRegEx.test(phone_number.value)) {
@@ -121,15 +110,70 @@ phone_number.addEventListener("input", function() {
 
 
 let nextButton = document.getElementById("nextButton")
-let fill = document.getElementById("fill")
+let previousButton = document.getElementById('previousButton')
+
+// var x = document.getElementsByClassName("tab");
+
+var currentTab = 0 // Current tab is set to be the first tab (0)
+showTab(currentTab) // Display the current tab
 
 
-nextButton.addEventListener("click", function(event) {
-    event.preventDefault()
-    if (form.checkValidity()) {
-        fill.classList.add('d-none')
+function showTab(n) {
+    let x = document.getElementsByClassName("tab");
+    // This function will display the specified tab of the form...
+    x[n].classList.add("d-block")
+    //... and fix the Previous/Next buttons:
+    if (n == 0) {
+        previousButton.classList.add("d-none")
+    }else {
+        previousButton.classList.remove("d-none")
     }
-})
+    if (n == (x.length - 1)) {
+      document.getElementById("nextButton").innerHTML = "დასრულება"
+    }else {
+      document.getElementById("nextButton").innerHTML = "შემდეგი"
+    }
+}
+
+function nextPrev(n) {
+    // This function will figure out which tab to display
+    let x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false
+    // Hide the current tab:
+    x[currentTab].classList.add("d-none")
+    // Increase or decrease the current tab by 1:
+    currentTab+=n
+    x[currentTab].classList.remove("d-none")
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      // ... the form gets submitted:
+      document.getElementById("form").submit()
+     
+
+      return false
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab)
+}
+
+function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true
+    x = document.getElementsByClassName("tab")
+    y = x[currentTab].getElementsByTagName("input")
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+        // If a field is empty...
+        if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        y[i].className += " invalid"
+        // and set the current valid status to false
+        valid = false
+        }
+    }
+    return valid // return the valid status
+}
 
 let positionRegEx = /^[0-9a-zA-Z.-]{2,30}$/
 let position = document.getElementById('position')
@@ -140,7 +184,6 @@ let employer = document.getElementById('employer')
 let employer_label = document.getElementById('employer_label')
 let employer_error = document.getElementById('employer_error')
 let employer_done = document.getElementById('employer_done')
-
 
 position.addEventListener("input", function() {
     if (!positionRegEx.test(position.value) || position.value.length<2) {
@@ -175,6 +218,11 @@ employer.addEventListener("input", function() {
         return true;
     }
 })
+
+
+
+
+
 
 
 
